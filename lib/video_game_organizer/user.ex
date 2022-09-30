@@ -2,12 +2,16 @@ defmodule VideoGameOrganizer.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias VideoGameOrganizer.Game
+
   schema "users" do
     field :email, :string
     field :password_hash, :string, redact: true
     field :password, :string, virtual: true
     field :name, :string
     field :phone_number, :string
+
+    has_many :games, Game
 
     timestamps()
   end

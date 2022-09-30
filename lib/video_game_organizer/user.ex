@@ -18,5 +18,21 @@ defmodule VideoGameOrganizer.User do
     |> validate_required([:email])
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 12)
+    |> maybe_put_password_hash()
+  end
+
+  defp maybe_put_password_hash(%Ecto.Changeset{valid?: true} = changeset) do
+    case get_change(changeset, :password) do
+      nil ->
+        changeset
+
+      password ->
+        hashed_password = Argon2.hash_pwd_salt(password)
+        put_change(changeset, :password_hash, hashed_password)
+    end
+  end
+
+  defp maybe_put_password_hash(changeset) do
+    changeset
   end
 end

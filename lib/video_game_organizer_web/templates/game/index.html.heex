@@ -1,0 +1,8 @@
+<%= for game <- @games do  %>
+  <div id={game.title}>
+    <h2><%= game.title %></h2>
+    <p><%= game.has_played %></p>
+
+    <p>Owned by: <%= game.user.name %></p>
+  </div>  
+<% end %>

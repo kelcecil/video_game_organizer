@@ -19,6 +19,8 @@ defmodule VideoGameOrganizerWeb.Router do
 
     get "/", PageController, :index
     get "/games", GameController, :index
+
+    resources "/user", UserController, only: [:new, :create]
   end
 
   # Other scopes may use custom stacks.

@@ -5,17 +5,27 @@ defmodule VideoGameOrganizerWeb.SessionController do
   alias VideoGameOrganizer.User
 
   def new(conn, _param) do
-    # Login
+    render(conn, "new.html", error_message: nil)
   end
 
-  def create(conn, %{"auth" => %{"email" => email, "password" => password}}) do
+  def create(conn, %{"auth" => %{"email" => email, "password" => password}} = params) do
+    IO.inspect(params)
+
     case Auth.authenticate(email, password) do
       %User{} = user ->
-        # Create our session
-        # Creating our cookie
-        # Puts cookie into session
+        token =
+          Phoenix.Token.sign(VideoGameOrganizerWeb.Endpoint, "THIS_IS_A_BAD_SECRET", user.id)
+
+        # Put a token into temporary session
+        conn
+        |> configure_session(renew: true)
+        |> clear_session()
+        |> put_session(:user_token, token)
+        # Does not exist yet.
+        |> redirect(to: Routes.dashboard_path(@conn, :index))
+
       nil ->
-        # Redirect back to the login page with a message
+        render(conn, "new.html", error_message: "Invalid email/password. Please try again.")
     end
   end
 end

@@ -1,0 +1,29 @@
+<h1>Hello, <%= @user.name %></h1>
+
+<div id="details">
+    <p><%= length(@user.games) %> game(s)</p>
+</div>
+
+<div id="games">
+    <%= for game <- @user.games do %>
+        <div id="game-#{game.id}">
+            <h2><%= game.title %></h2>
+            <p><%= game.has_played %></p>
+        </div>
+    <% end %>
+</div>
+
+<div id="games-table">
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Has played?</th>
+        </tr>
+        <%= for game <- @user.games do %>
+            <tr>
+                <td><%= game.title %></td>
+                <td><%= game.has_played %></td>
+            </tr>
+        <% end %>
+    </table>
+</div>

@@ -22,7 +22,7 @@ defmodule VideoGameOrganizerWeb.SessionController do
         |> clear_session()
         |> put_session(:user_token, token)
         # Does not exist yet.
-        |> redirect(to: Routes.dashboard_path(@conn, :index))
+        |> redirect(to: Routes.dashboard_path(conn, :index))
 
       nil ->
         render(conn, "new.html", error_message: "Invalid email/password. Please try again.")

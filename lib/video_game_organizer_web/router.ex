@@ -22,6 +22,8 @@ defmodule VideoGameOrganizerWeb.Router do
 
     resources "/user", UserController, only: [:new, :create]
     resources "/session", SessionController, only: [:new, :create]
+
+    get "/dashboard", DashboardController, :index
   end
 
   # Other scopes may use custom stacks.
@@ -42,7 +44,7 @@ defmodule VideoGameOrganizerWeb.Router do
     scope "/" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: VideoGameOrganizerWeb.Telemetry
+      live_dashboard "/live-dashboard", metrics: VideoGameOrganizerWeb.Telemetry
     end
   end
 

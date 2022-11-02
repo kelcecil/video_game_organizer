@@ -8,6 +8,7 @@
 
 .game-card {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 200px;
 
@@ -15,4 +16,9 @@
   border-radius: 5px;
   margin: 20px;
   padding: 20px;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: row;
 }

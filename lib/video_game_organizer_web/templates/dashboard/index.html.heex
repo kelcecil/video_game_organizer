@@ -7,8 +7,23 @@
 <div class="card-container" id="games">
     <%= for game <- @user.games do %>
         <div class="game-card" id="game-#{game.id}">
-            <h2><%= game.title %></h2>
-            <p><%= game.has_played %></p>
+            <%= if game.cover_art != nil do %>
+                <div>
+                    <img src={game.cover_art} />
+                </div>
+            <% end %>
+            <div class="game-info">
+                <div>
+                    <h2><%= game.title %></h2>
+                    <h3><%= game.console %></h3>
+                </div>
+                <div>
+                    <p><%= game.has_played %></p>
+                </div>
+            </div>
+            <div>
+                <a href={Routes.game_path(@conn, :edit, game.id)}>Edit</a>
+            </div>
         </div>
     <% end %>
 </div>

@@ -18,8 +18,8 @@ defmodule VideoGameOrganizerWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/games", GameController, :index
 
+    resources "/games", GameController, only: [:index, :edit, :update]
     resources "/user", UserController, only: [:new, :create]
     resources "/session", SessionController, only: [:new, :create]
 

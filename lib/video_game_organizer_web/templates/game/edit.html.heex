@@ -1,0 +1,26 @@
+<%= if @unauthorized do %>
+    <h1>You are unauthorized to edit this game.</h1>
+    <h1>Please return to the dashboard</h1>
+<% else %>
+    <h1>Edit</h1>
+
+    <%= form_for @changeset, Routes.game_path(@conn, :update, @game_id), fn f -> %>
+
+        <label>
+            Title
+            <%= text_input f, :title %>
+        </label>
+
+        <label>
+            Console
+            <%= text_input f, :console %>
+        </label>
+
+        <label>
+            Cover Art URL
+            <%= text_input f, :cover_art %>
+        </label>
+
+        <%= submit "Update" %>
+    <% end %>
+<% end %>
